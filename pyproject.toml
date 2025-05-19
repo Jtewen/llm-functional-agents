@@ -1,0 +1,64 @@
+[tool.poetry]
+name = "llm-functional-agents"
+version = "0.1.0"
+description = "A lightweight Python library for creating reliable, contract-driven LLM functions whose core logic is implemented by an LLM."
+authors = ["Jacob Ewen <jacobt.ewen@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "llm_functional_agents"}]
+homepage = "https://github.com/jtewen/llm-functional-agents"
+repository = "https://github.com/jtewen/llm-functional-agents"
+keywords = ["llm", "functions", "ai", "agent", "pydantic", "openai", "openrouter"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Operating System :: OS Independent"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13" # Adjusted to a common compatible range, ensure your code supports this
+pydantic = ">=2.0,<3.0"
+openai = "^1.0.0" # Specify a version range, e.g., ^1.0.0
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0"
+pytest-cov = "^4.0"
+black = "^23.0"
+flake8 = "^6.0"
+isort = "^5.0"
+mypy = "^1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# --- Tool Configurations ---
+
+[tool.black]
+line-length = 119
+target-version = ['py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 119
+
+[tool.flake8]
+max-line-length = 119
+extend-ignore = ["E203"] # Ignore whitespace before ':' (black compatible)
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true # Can be helpful initially, tighten later if possible
+# disallow_untyped_defs = true # Consider enabling for stricter type checking
+# check_untyped_defs = true    # Consider enabling for stricter type checking 

@@ -1,0 +1,6 @@
+# For use in environments without Poetry.
+# Ensure this file is kept in sync with pyproject.toml.
+
+pydantic>=2.0,<3.0
+openai>=1.0.0 # From ^1.0.0 in pyproject.toml
+python-dotenv>=1.0.0 # From ^1.0.0 in pyproject.toml 
