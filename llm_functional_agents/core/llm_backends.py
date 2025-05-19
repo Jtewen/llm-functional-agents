@@ -53,10 +53,10 @@ class OpenAIBackend(LLMBackend):
             # This check is important here, as get_llm_backend_config might not raise for a missing key
             # if it's just a warning there.
             env_var_name = "OPENAI_API_KEY" if self.config.get("type") == "openai" else "OPENROUTER_API_KEY"
-            raise ConfigurationError(
-                f"API key for backend '{self.backend_id}' (type: {self.config.get("type")}) not found. "
-                f"Set via {env_var_name} environment variable or in config."
-            )
+            # Simplified for debugging:
+            msg_part1 = f"API key for backend '{self.backend_id}' (type: {self.config.get('type')}) not found. "
+            msg_part2 = f"Set via {env_var_name} environment variable or in config."
+            raise ConfigurationError(msg_part1 + msg_part2)
         
         base_url = self.config.get("base_url")
         default_headers = None
