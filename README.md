@@ -20,17 +20,31 @@ A lightweight Python library for creating reliable, contract-driven LLM function
 
 ## Overview
 
-This library allows developers to define Python functions where an LLM performs the core intelligent task (e.g., classification, summarization, rewriting). The LLM then uses a minimal Python code snippet to deliver its structured result, which must adhere to a clear, Python-defined contract. It emphasizes:
+LLM Functional Agents offers a Pythonic way to seamlessly integrate Large Language Models (LLMs) for specific, "fuzzy" tasks within your existing codebase. Think of it as using LLMs as **universal function approximators for atomic operations** like text classification, summarization, or data extraction, without the overhead of complex agentic frameworks. The goal is to make LLM integration feel more like normal Python development and less like pure prompt engineering.
 
--   **Clear Contracts:** Input/output schemas (e.g., via Pydantic) and type hints define the expected structure for the LLM's response.
--   **Code-Grounded Validation:** Pre-processing hooks and, critically, post-condition assertions written in Python to validate the LLM's structured output.
--   **Automated Feedback Loop:** Mechanisms for retrying LLM calls with contextual feedback on assertion failures or if the output doesn't meet the contract.
+This library allows developers to define standard Python functions where an LLM performs the core intelligent logic. The LLM then uses a minimal Python code snippet to deliver its structured result, which must adhere to a clear, Python-defined contract. It emphasizes:
+
+-   **Python-Centric Development:** Define and call LLM-powered capabilities just like regular Python functions.
+-   **Clear Contracts:** Input/output schemas (e.g., via Pydantic) and type hints define the expected structure for the LLM's response, ensuring predictability.
+-   **Code-Grounded Validation:** The primary grounding for the LLM's output comes from Python-defined assertions and post-condition hooks, ensuring the results are not just syntactically correct but also semantically valid for your use case. This shifts focus from elaborate prompt engineering to robust, code-based validation.
+-   **Automated Feedback Loop:** Mechanisms for retrying LLM calls with contextual feedback on assertion failures or if the output doesn't meet the contract, enhancing reliability.
 -   **Safe Execution:** The LLM's Python-formatted response (the minimal code snippet) is executed in a sandbox to securely integrate its answer into the Python environment.
 -   **Pluggable LLM Backends:** Support for different LLM providers.
 
+The term "Functional Agent" here refers to an LLM acting as the specialized, intelligent core of a Python function, dedicated to that function's specific task.
+
 ## Core Idea
 
-The `@llm_func` decorator transforms a standard Python function stub (signature + docstring) into a robust, LLM-powered operation. The docstring serves as the primary prompt for the LLM's reasoning process. The LLM then provides its answer by generating a minimal Python code snippet (typically assigning the result to a specific variable). This snippet is executed in a sandbox, and the result is validated against the defined contract and any post-condition assertions.
+The `@llm_func` decorator is the cornerstone of this library. It transforms a standard Python function stub (consisting of its signature, type hints, and docstring) into a robust, LLM-powered operation. Instead of you writing the function body, the LLM does.
+
+Here's the typical workflow:
+1. You define a Python function, specifying its inputs and outputs (ideally with Pydantic models).
+2. In the docstring, you describe the task for the LLM. This docstring serves as the primary natural language instruction.
+3. The LLM generates a minimal Python code snippet (usually just assigning the result to a predefined variable like `llm_output`) to fulfill the task.
+4. This snippet is executed in a restricted sandbox environment.
+5. The result is then rigorously validated against your defined output contract (e.g., Pydantic model) and any custom Python assertion functions (post-hooks) you provide. These assertions are key to "grounding" the LLM's output in your specific requirements.
+
+This approach allows you to offload intelligent but "fuzzy" sub-tasks to an LLM, while keeping the overall control flow and validation within your familiar Python environment.
 
 ```mermaid
 graph TD
