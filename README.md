@@ -86,46 +86,46 @@ See the [Quick Start Guide](#quick-start-guide) below for a runnable example.
 
 ### Installation
 
-1.  **Clone the repository (if contributing or running examples locally):**
+**For Users:**
+
+Install `llm-functional-agents` from PyPI, preferably within a Python virtual environment:
+
+```bash
+pip install llm-functional-agents
+```
+
+**For Developers (Contributing or Running Examples Directly from Source):**
+
+1.  **Clone the repository:**
     ```bash
     git clone https://github.com/jtewen/llm-functional-agents.git
     cd llm-functional-agents
     ```
-2.  **Set up a virtual environment (recommended):**
+2.  **Set up a virtual environment (recommended) and install dependencies using Poetry:**
+    If you don't have Poetry, install it first ([Poetry installation guide](https://python-poetry.org/docs/#installation)).
     ```bash
-    python -m venv .venv
-    source .venv/bin/activate  # On Windows: .venv\\Scripts\\activate
-    ```
-3.  **Install dependencies:**
-    The project uses Poetry. If you don't have Poetry, install it first ([Poetry installation guide](https://python-poetry.org/docs/#installation)).
-    ```bash
+    # Activate your preferred virtual environment
     poetry install
     ```
-    Alternatively, for non-development use, install from `requirements.txt`:
-    ```bash
-    pip install -r requirements.txt
-    ```
 
-**Supported Python Versions:** `>=3.9` to `<3.13`. (See `pyproject.toml` for full dependency details).
+**Supported Python Versions:** `>=3.9` to `<3.13`.
 
-### Quick Start Guide: Text Categorization
+### Quick Start Example: Text Categorization
 
 This example demonstrates an LLM function that categorizes input text.
 
 1.  **Set up your API Key:**
-    Create a `.env` file in the project root (`llm-functional-agents/.env`) with your LLM provider API key. For OpenRouter (which provides access to various models including free ones):
+    Create a `.env` file in your project root with your LLM provider API key. For OpenRouter:
     ```env
     # .env
     OPENROUTER_API_KEY="your_openrouter_api_key_here"
     ```
     > [!IMPORTANT]
-    > Add `.env` to your `.gitignore` file to avoid committing secret keys.
+    > Ensure `.env` is in your `.gitignore`.
 
-2.  **Create and run the categorizer script:**
-    Save the following as `my_categorizer.py` in your project root:
+2.  **Create and run `my_categorizer.py`:**
 
     ```python
-    # my_categorizer.py
     from typing import Optional
     from pydantic import BaseModel, Field
     from llm_functional_agents import llm_func, LLMCallContext # LLMCallContext for advanced error inspection
