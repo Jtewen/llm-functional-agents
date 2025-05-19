@@ -1,13 +1,13 @@
-name: Publish Python Package to TestPyPI
+name: Publish Python Package to PyPI
 
 on:
   push:
     tags:
-      - 'v*-test' # Trigger on tags like v0.1.0-test, v1.2.3-test
+      - 'v*' # Trigger on tags like v0.1.0, v1.2.3
 
 jobs:
   build-and-publish:
-    name: Build and publish Python distributions to TestPyPI
+    name: Build and publish Python distributions to PyPI
     runs-on: ubuntu-latest
     permissions:
       id-token: write # This is required for trusted publishing (OIDC)
@@ -31,10 +31,5 @@ jobs:
         run: poetry build
         shell: bash
 
-      - name: Publish package to TestPyPI
+      - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          # `Pypi-Password` is automatically set by the action using OIDC
-          # No need to set `user` or `password` inputs
-          # The action will automatically find the built distributions in dist/ 
