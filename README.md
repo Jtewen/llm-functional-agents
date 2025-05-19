@@ -34,7 +34,7 @@ The `@llm_func` decorator transforms a standard Python function stub (signature 
 
 ```mermaid
 graph TD
-    A[User Call with Input Data] --> B{<code>@llm_func</code> Decorator};
+    A[User Call with Input Data] --> B{"@llm_func Decorator"};
     B --> C[1. Prompt Generation];
     C --> D[2. LLM Call];
     D --> E[3. LLM Returns Code Snippet];
@@ -150,12 +150,12 @@ This example demonstrates an LLM function that categorizes input text.
 
     @llm_func(output_model=CategoryOutput, post_hooks=[check_category_is_allowed])
     def categorize_text(data: TextInput) -> CategoryOutput:
-        \"\"\"
+        """
         Analyze the input 'data.text' and determine its category.
         The category MUST be one of: {ALLOWED_CATEGORIES}.
         Optionally, provide a 'confidence' score (float between 0.0 and 1.0).
         Example for llm_output: {{ "category": "technical_support", "confidence": 0.85 }}
-        \"\"\"
+        """
         raise NotImplementedError("LLM provides the implementation based on the docstring.")
 
     def run_example():

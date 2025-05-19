@@ -1,0 +1,40 @@
+name: Publish Python Package to TestPyPI
+
+on:
+  push:
+    tags:
+      - 'v*-test' # Trigger on tags like v0.1.0-test, v1.2.3-test
+
+jobs:
+  build-and-publish:
+    name: Build and publish Python distributions to TestPyPI
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # This is required for trusted publishing (OIDC)
+      contents: read # To checkout the repository
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9' # Or your project's minimum Python version
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: false # Recommended for CI
+
+      - name: Build package
+        run: poetry build
+        shell: bash
+
+      - name: Publish package to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          # `Pypi-Password` is automatically set by the action using OIDC
+          # No need to set `user` or `password` inputs
+          # The action will automatically find the built distributions in dist/ 
