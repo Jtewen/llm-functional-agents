@@ -46,21 +46,6 @@ Here's the typical workflow:
 
 This approach allows you to offload intelligent but "fuzzy" sub-tasks to an LLM, while keeping the overall control flow and validation within your familiar Python environment.
 
-```mermaid
-graph TD
-    A[User Call with Input Data] --> B{"@llm_func Decorator"};
-    B --> C[1. Prompt Generation];
-    C --> D[2. LLM Call];
-    D --> E[3. LLM Returns Code Snippet];
-    E --> F{4. Sandbox Execution};
-    F -- Code Output --> G{5. Validation & Pydantic Parsing};
-    G -- Valid --> H[Success: Return Parsed Output];
-    G -- Invalid --> I{6. Retry Logic};
-    I -- Max Retries Not Reached --> C;
-    I -- Max Retries Reached --> J[Failure: Raise MaxRetriesExceededError];
-    F -- Sandbox Error --> I;
-```
-
 ## Quick Teaser
 
 The core of the library is the `@llm_func` decorator. You define a Python function, describe the task for an LLM in its docstring, and the LLM generates the code to perform that task, returning structured output.
