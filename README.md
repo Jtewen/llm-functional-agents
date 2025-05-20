@@ -273,45 +273,6 @@ Currently, detailed API documentation is best found by exploring the source code
 
 Future versions may include Sphinx or MkDocs generated documentation.
 
-## Contributing
-
-We welcome contributions to LLM Functional Agents! Here's how you can help:
-
-**Reporting Bugs or Requesting Features:**
-
-*   Please open an issue on the [GitHub Issues page](https://github.com/jtewen/llm-functional-agents/issues).
-*   For bugs, include steps to reproduce, expected behavior, and actual behavior.
-*   For feature requests, describe the feature and its potential benefits.
-
-**Setting Up Your Development Environment:**
-
-1.  Follow the steps in the "Getting Started > Installation" section.
-2.  This project uses Poetry for dependency management and various linters/formatters (Black, Flake8, isort, MyPy) configured in `pyproject.toml`.
-
-**Making Changes:**
-
-1.  **Fork** the repository on GitHub.
-2.  Create a new **branch** for your feature or bug fix (e.g., `feature/my-new-feature` or `fix/issue-123`).
-3.  Make your changes. Ensure you add or update tests as appropriate.
-4.  **Format and Lint:** Before committing, please run the formatters and linters:
-    ```bash
-    poetry run black .
-    poetry run isort .
-    poetry run flake8
-    poetry run mypy .
-    ```
-5.  **Run Tests:** Ensure all tests pass:
-    ```bash
-    poetry run pytest
-    ```
-6.  **Commit** your changes with a clear and descriptive commit message.
-7.  **Push** your branch to your fork.
-8.  Open a **Pull Request (PR)** to the `main` branch of the original repository.
-    *   Clearly describe the changes in your PR.
-    *   Link to any relevant issues.
-
-We appreciate your contributions to making this library better!
-
 ## Support and Community
 
 For questions, support, or to report issues, please use the following:
